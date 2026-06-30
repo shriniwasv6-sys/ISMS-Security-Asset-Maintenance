@@ -6,6 +6,7 @@ const authRoutes = require("./routes/authRoutes");
 const usersRoutes = require("./routes/usersRoutes");
 const sitesRoutes = require("./routes/sitesRoutes");
 const vendorsRoutes = require("./routes/vendorsRoutes");
+const assetCategoriesRoutes = require("./routes/assetCategoriesRoutes");
 const app = express();
 
 app.use(cors());
@@ -22,7 +23,7 @@ app.use("/api/auth", authRoutes);
 app.use("/api/users", usersRoutes);
 app.use("/api/sites", sitesRoutes);
 app.use("/api/vendors", vendorsRoutes);
-
+app.use("/api/asset-categories", assetCategoriesRoutes);
 
 const { poolPromise } = require("./config/db");
 
