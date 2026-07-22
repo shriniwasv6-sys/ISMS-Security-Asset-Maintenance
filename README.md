@@ -379,10 +379,8 @@ https://github.com/shriniwasv6-sys/ISMS-Security-Asset-Maintenance
 
 # Author
 
-**Sharma Shriniwas**
+**Vishwakarma Shriniwas**
 
 Server-Side Development (SSD2026APR)
 
-Integrated Security Management System (ISMS)
-
-2026
+Integrated Security Management System (ISMS) 2026
