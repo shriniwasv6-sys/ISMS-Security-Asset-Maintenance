@@ -1,0 +1,213 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+
+    <meta
+        name="viewport"
+        content="width=device-width, initial-scale=1.0"
+    >
+
+    <title>ISMS Sites</title>
+
+    <link
+        rel="stylesheet"
+        href="/css/main.css"
+    >
+</head>
+
+<body>
+    <aside
+        id="sidebar"
+        class="sidebar"
+    ></aside>
+
+    <header
+        id="topbar"
+        class="topbar"
+    ></header>
+
+    <main class="main-content">
+        <section class="page-heading">
+            <div>
+                <h1>Site Management</h1>
+
+                <p>
+                    Create, view, update and delete ISMS sites.
+                </p>
+            </div>
+
+            <button
+                id="showSiteFormButton"
+                class="primary-button"
+                type="button"
+            >
+                Add Site
+            </button>
+        </section>
+
+        <section
+            id="siteFormPanel"
+            class="content-panel hidden"
+        >
+            <div class="panel-header">
+                <div>
+                    <h2 id="siteFormTitle">
+                        Add Site
+                    </h2>
+
+                    <p>
+                        Enter the site information below.
+                    </p>
+                </div>
+            </div>
+
+            <form id="siteForm">
+                <input
+                    id="siteId"
+                    type="hidden"
+                >
+
+                <div class="form-grid">
+                    <div class="form-group">
+                        <label for="siteName">
+                            Site Name
+                        </label>
+
+                        <input
+                            id="siteName"
+                            type="text"
+                            maxlength="150"
+                            required
+                        >
+                    </div>
+
+                    <div class="form-group">
+                        <label for="address">
+                            Address
+                        </label>
+
+                        <input
+                            id="address"
+                            type="text"
+                            maxlength="200"
+                            required
+                        >
+                    </div>
+
+                    <div class="form-group">
+                        <label for="contactPerson">
+                            Contact Person
+                        </label>
+
+                        <input
+                            id="contactPerson"
+                            type="text"
+                            maxlength="150"
+                        >
+                    </div>
+
+                    <div class="form-group">
+                        <label for="contactNumber">
+                            Contact Number
+                        </label>
+
+                        <input
+                            id="contactNumber"
+                            type="text"
+                            maxlength="30"
+                        >
+                    </div>
+                </div>
+
+                <div class="form-actions">
+                    <button
+                        class="primary-button"
+                        type="submit"
+                    >
+                        Save Site
+                    </button>
+
+                    <button
+                        id="cancelSiteButton"
+                        class="secondary-button"
+                        type="button"
+                    >
+                        Cancel
+                    </button>
+                </div>
+            </form>
+
+            <p
+                id="siteFormMessage"
+                class="page-message"
+                aria-live="polite"
+            ></p>
+        </section>
+
+        <section class="content-panel">
+            <div class="panel-header table-panel-header">
+                <div>
+                    <h2>Sites</h2>
+
+                    <p>
+                        Existing ISMS site records.
+                    </p>
+                </div>
+
+                <div class="table-tools">
+                    <input
+                        id="siteSearch"
+                        class="search-input"
+                        type="search"
+                        placeholder="Search sites..."
+                    >
+
+                    <button
+                        id="refreshSitesButton"
+                        class="secondary-button"
+                        type="button"
+                    >
+                        Refresh
+                    </button>
+                </div>
+            </div>
+
+            <div class="table-container">
+                <table>
+                    <thead>
+                        <tr>
+                            <th>ID</th>
+                            <th>Site Name</th>
+                            <th>Location</th>
+                            <th>Contact Person</th>
+                            <th>Contact Number</th>
+                            <th>Created</th>
+                            <th>Actions</th>
+                        </tr>
+                    </thead>
+
+                    <tbody id="sitesTableBody">
+                        <tr>
+                            <td colspan="7">
+                                Loading sites...
+                            </td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+
+            <p
+                id="sitesMessage"
+                class="page-message"
+                aria-live="polite"
+            ></p>
+        </section>
+    </main>
+
+    <script src="/js/api.js"></script>
+    <script src="/js/auth.js"></script>
+    <script src="/js/layout.js"></script>
+    <script src="/js/sites.js"></script>
+</body>
+</html>

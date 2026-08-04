@@ -1,0 +1,208 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+
+    <meta
+        name="viewport"
+        content="width=device-width, initial-scale=1.0"
+    >
+
+    <title>ISMS Dashboard</title>
+
+    <link
+        rel="stylesheet"
+        href="/css/main.css"
+    >
+</head>
+
+<body>
+    <aside id="sidebar" class="sidebar"></aside>
+
+    <header id="topbar" class="topbar"></header>
+
+    <main class="main-content">
+        <section class="page-heading">
+            <div>
+                <h1>Dashboard</h1>
+
+                <p>
+                    Security asset maintenance overview
+                </p>
+            </div>
+
+            <button
+                id="refreshDashboard"
+                class="primary-button"
+                type="button"
+            >
+                Refresh
+            </button>
+        </section>
+
+        <section class="dashboard-cards">
+            <article class="summary-card">
+                <span class="card-label">
+                    Total Users
+                </span>
+
+                <strong id="totalUsers">
+                    0
+                </strong>
+
+                <a href="/users.html">
+                    View users
+                </a>
+            </article>
+
+            <article class="summary-card">
+                <span class="card-label">
+                    Total Sites
+                </span>
+
+                <strong id="totalSites">
+                    0
+                </strong>
+
+                <a href="/sites.html">
+                    View sites
+                </a>
+            </article>
+
+            <article class="summary-card">
+                <span class="card-label">
+                    Total Vendors
+                </span>
+
+                <strong id="totalVendors">
+                    0
+                </strong>
+
+                <a href="/vendors.html">
+                    View vendors
+                </a>
+            </article>
+
+            <article class="summary-card">
+                <span class="card-label">
+                    Asset Categories
+                </span>
+
+                <strong id="totalCategories">
+                    0
+                </strong>
+
+                <a href="/asset-categories.html">
+                    View categories
+                </a>
+            </article>
+
+            <article class="summary-card">
+                <span class="card-label">
+                    Total Assets
+                </span>
+
+                <strong id="totalAssets">
+                    0
+                </strong>
+
+                <a href="/assets.html">
+                    View assets
+                </a>
+            </article>
+
+            <article class="summary-card warning-card">
+                <span class="card-label">
+                    Open Maintenance
+                </span>
+
+                <strong id="openRequests">
+                    0
+                </strong>
+
+                <a href="/maintenance-requests.html">
+                    View requests
+                </a>
+            </article>
+        </section>
+
+        <section class="content-panel">
+            <div class="panel-header">
+                <div>
+                    <h2>System Status</h2>
+
+                    <p>
+                        API and database connection status
+                    </p>
+                </div>
+            </div>
+
+            <div
+                id="systemStatus"
+                class="status-message"
+            >
+                Checking system status...
+            </div>
+        </section>
+
+        <section class="content-panel">
+            <div class="panel-header">
+                <div>
+                    <h2>Quick Actions</h2>
+
+                    <p>
+                        Access commonly used modules
+                    </p>
+                </div>
+            </div>
+
+            <div class="quick-actions">
+                <a
+                    class="action-button"
+                    href="/users.html"
+                >
+                    Add User
+                </a>
+
+                <a
+                    class="action-button"
+                    href="/sites.html"
+                >
+                    Add Site
+                </a>
+
+                <a
+                    class="action-button"
+                    href="/vendors.html"
+                >
+                    Add Vendor
+                </a>
+
+                <a
+                    class="action-button"
+                    href="/assets.html"
+                >
+                    Add Asset
+                </a>
+
+                <a
+                    class="action-button"
+                    href="/maintenance-requests.html"
+                >
+                    Create Request
+                </a>
+            </div>
+        </section>
+
+        <p
+            id="dashboardMessage"
+            class="error-message"
+        ></p>
+    </main>
+
+    <script src="/js/api.js"></script>
+    <script src="/js/auth.js"></script>
+    <script src="/js/layout.js"></script>
+    <script src="/js/dashboard.js"></script>
+</body>
+</html>
