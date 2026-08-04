@@ -1,0 +1,186 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+
+    <meta
+        name="viewport"
+        content="width=device-width, initial-scale=1.0"
+    >
+
+    <title>ISMS Asset Categories</title>
+
+    <link
+        rel="stylesheet"
+        href="/css/main.css"
+    >
+</head>
+
+<body>
+    <aside
+        id="sidebar"
+        class="sidebar"
+    ></aside>
+
+    <header
+        id="topbar"
+        class="topbar"
+    ></header>
+
+    <main class="main-content">
+        <section class="page-heading">
+            <div>
+                <h1>Asset Category Management</h1>
+
+                <p>
+                    Create, view, update and delete asset categories.
+                </p>
+            </div>
+
+            <button
+                id="showCategoryFormButton"
+                class="primary-button"
+                type="button"
+            >
+                Add Category
+            </button>
+        </section>
+
+        <section
+            id="categoryFormPanel"
+            class="content-panel hidden"
+        >
+            <div class="panel-header">
+                <div>
+                    <h2 id="categoryFormTitle">
+                        Add Category
+                    </h2>
+
+                    <p>
+                        Enter the asset category information below.
+                    </p>
+                </div>
+            </div>
+
+            <form id="categoryForm">
+                <input
+                    id="categoryId"
+                    type="hidden"
+                >
+
+                <div class="form-grid">
+                    <div class="form-group">
+                        <label for="categoryName">
+                            Category Name
+                        </label>
+
+                        <input
+                            id="categoryName"
+                            type="text"
+                            maxlength="150"
+                            required
+                        >
+                    </div>
+
+                    <div class="form-group">
+                        <label for="description">
+                            Description
+                        </label>
+
+                        <textarea
+                            id="description"
+                            rows="3"
+                            maxlength="500"
+                        ></textarea>
+                    </div>
+                </div>
+
+                <div class="form-actions">
+                    <button
+                        class="primary-button"
+                        type="submit"
+                    >
+                        Save Category
+                    </button>
+
+                    <button
+                        id="cancelCategoryButton"
+                        class="secondary-button"
+                        type="button"
+                    >
+                        Cancel
+                    </button>
+                </div>
+            </form>
+
+            <p
+                id="categoryFormMessage"
+                class="page-message"
+                aria-live="polite"
+            ></p>
+        </section>
+
+        <section class="content-panel">
+            <div class="panel-header table-panel-header">
+                <div>
+                    <h2>Asset Categories</h2>
+
+                    <p>
+                        Existing ISMS asset category records.
+                    </p>
+                </div>
+
+                <div class="table-tools">
+                    <input
+                        id="categorySearch"
+                        class="search-input"
+                        type="search"
+                        placeholder="Search categories..."
+                    >
+
+                    <button
+                        id="refreshCategoriesButton"
+                        class="secondary-button"
+                        type="button"
+                    >
+                        Refresh
+                    </button>
+                </div>
+            </div>
+
+            <div class="table-container">
+                <table>
+                    <thead>
+                        <tr>
+                            <th>ID</th>
+                            <th>Category Name</th>
+                            <th>Description</th>
+                            <th>Created</th>
+                            <th>Actions</th>
+                        </tr>
+                    </thead>
+
+                    <tbody id="categoriesTableBody">
+                        <tr>
+                            <td colspan="5">
+                                Loading categories...
+                            </td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+
+            <p
+                id="categoriesMessage"
+                class="page-message"
+                aria-live="polite"
+            ></p>
+        </section>
+    </main>
+
+    <script src="/js/api.js"></script>
+    <script src="/js/auth.js"></script>
+    <script src="/js/layout.js"></script>
+    <script src="/js/asset-categories.js"></script>
+</body>
+</html>

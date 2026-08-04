@@ -1,0 +1,224 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+
+    <meta
+        name="viewport"
+        content="width=device-width, initial-scale=1.0"
+    >
+
+    <title>ISMS Vendors</title>
+
+    <link
+        rel="stylesheet"
+        href="/css/main.css"
+    >
+</head>
+
+<body>
+    <aside
+        id="sidebar"
+        class="sidebar"
+    ></aside>
+
+    <header
+        id="topbar"
+        class="topbar"
+    ></header>
+
+    <main class="main-content">
+        <section class="page-heading">
+            <div>
+                <h1>Vendor Management</h1>
+
+                <p>
+                    Create, view, update and delete ISMS vendors.
+                </p>
+            </div>
+
+            <button
+                id="showVendorFormButton"
+                class="primary-button"
+                type="button"
+            >
+                Add Vendor
+            </button>
+        </section>
+
+        <section
+            id="vendorFormPanel"
+            class="content-panel hidden"
+        >
+            <div class="panel-header">
+                <div>
+                    <h2 id="vendorFormTitle">
+                        Add Vendor
+                    </h2>
+
+                    <p>
+                        Enter the vendor information below.
+                    </p>
+                </div>
+            </div>
+
+            <form id="vendorForm">
+                <input
+                    id="vendorId"
+                    type="hidden"
+                >
+
+                <div class="form-grid">
+                    <div class="form-group">
+                        <label for="vendorName">
+                            Vendor Name
+                        </label>
+
+                        <input
+                            id="vendorName"
+                            type="text"
+                            maxlength="150"
+                            required
+                        >
+                    </div>
+
+                    <div class="form-group">
+                        <label for="contactPerson">
+                            Contact Person
+                        </label>
+
+                        <input
+                            id="contactPerson"
+                            type="text"
+                            maxlength="150"
+                        >
+                    </div>
+
+                    <div class="form-group">
+                        <label for="email">
+                            Email Address
+                        </label>
+
+                        <input
+                            id="email"
+                            type="email"
+                            maxlength="150"
+                        >
+                    </div>
+
+                    <div class="form-group">
+                        <label for="phoneNumber">
+                            Phone Number
+                        </label>
+
+                        <input
+                            id="phoneNumber"
+                            type="text"
+                            maxlength="30"
+                        >
+                    </div>
+
+                    <div class="form-group form-grid-full">
+                        <label for="address">
+                            Address
+                        </label>
+
+                        <textarea
+                            id="address"
+                            rows="3"
+                            maxlength="300"
+                        ></textarea>
+                    </div>
+                </div>
+
+                <div class="form-actions">
+                    <button
+                        class="primary-button"
+                        type="submit"
+                    >
+                        Save Vendor
+                    </button>
+
+                    <button
+                        id="cancelVendorButton"
+                        class="secondary-button"
+                        type="button"
+                    >
+                        Cancel
+                    </button>
+                </div>
+            </form>
+
+            <p
+                id="vendorFormMessage"
+                class="page-message"
+                aria-live="polite"
+            ></p>
+        </section>
+
+        <section class="content-panel">
+            <div class="panel-header table-panel-header">
+                <div>
+                    <h2>Vendors</h2>
+
+                    <p>
+                        Existing ISMS vendor records.
+                    </p>
+                </div>
+
+                <div class="table-tools">
+                    <input
+                        id="vendorSearch"
+                        class="search-input"
+                        type="search"
+                        placeholder="Search vendors..."
+                    >
+
+                    <button
+                        id="refreshVendorsButton"
+                        class="secondary-button"
+                        type="button"
+                    >
+                        Refresh
+                    </button>
+                </div>
+            </div>
+
+            <div class="table-container">
+                <table>
+                    <thead>
+                        <tr>
+                            <th>ID</th>
+                            <th>Vendor Name</th>
+                            <th>Contact Person</th>
+                            <th>Email</th>
+                            <th>Phone</th>
+                            <th>Address</th>
+                            <th>Actions</th>
+                        </tr>
+                    </thead>
+
+                    <tbody id="vendorsTableBody">
+                        <tr>
+                            <td colspan="7">
+                                Loading vendors...
+                            </td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+
+            <p
+                id="vendorsMessage"
+                class="page-message"
+                aria-live="polite"
+            ></p>
+        </section>
+    </main>
+
+    <script src="/js/api.js"></script>
+    <script src="/js/auth.js"></script>
+    <script src="/js/layout.js"></script>
+    <script src="/js/vendors.js"></script>
+</body>
+</html>

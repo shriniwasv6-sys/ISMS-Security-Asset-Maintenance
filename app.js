@@ -8,6 +8,9 @@ const usersRoutes = require("./routes/usersRoutes");
 const sitesRoutes = require("./routes/sitesRoutes");
 const vendorsRoutes = require("./routes/vendorsRoutes");
 const assetCategoriesRoutes = require("./routes/assetCategoriesRoutes");
+const assetsRoutes = require("./routes/assetsRoutes");
+
+app.use("/api/assets", assetsRoutes);
 
 const { poolPromise } = require("./config/db");
 
