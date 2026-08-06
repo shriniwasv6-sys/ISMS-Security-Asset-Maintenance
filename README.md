@@ -1,72 +1,272 @@
 # Integrated Security Management System (ISMS)
 
-## Server-Side Development (SSD2026APR)
+## Security Asset Maintenance Application
 
-### Project Theme
-Industrial Relevance
+The Integrated Security Management System, or ISMS, is a full-stack web application developed for managing security assets, maintenance requests, sites, vendors, users, and reporting information.
 
----
-
-# Project Overview
-
-The **Integrated Security Management System (ISMS)** is a RESTful backend application developed using **Node.js**, **Express.js**, and **Microsoft SQL Server**.
-
-The purpose of the system is to manage security assets, customer sites, vendors, users, and maintenance operations through secure REST APIs.
+The application was created for the Server-Side Development assignment using Node.js, Express.js, Microsoft SQL Server, REST APIs, HTML, CSS, and JavaScript.
 
 ---
 
-# Technology Stack
+## Student Information
+
+**Student Name:** Vishwakarma Shriniwas
+**Student ID:** 7069107M  
+**Module:** Server-Side Development  
+**Course:** Diploma in Full-Stack Development  
+**Academic Year:** AY2026/2027  
+**Project Theme:** Industrial Relevance  
+
+**GitHub Repository:**  
+https://github.com/shriniwasv6-sys/ISMS-Security-Asset-Maintenance
+
+---
+
+## Project Overview
+
+Security systems such as card access systems, CCTV systems, fire alarm systems, intercom systems, UPS systems, and barrier systems require regular maintenance.
+
+Organisations often manage these assets using spreadsheets, email, manual records, or separate applications. This can make it difficult to track:
+
+- asset locations;
+- asset warranty expiry dates;
+- vendors;
+- maintenance requests;
+- assigned engineers;
+- request priorities;
+- request statuses;
+- completed maintenance work.
+
+The ISMS application provides one central system for managing security assets and maintenance activities.
+
+---
+
+## Main Objectives
+
+The objectives of this project are to:
+
+- develop a backend application using Node.js and Express.js;
+- connect the application to Microsoft SQL Server;
+- implement REST API endpoints;
+- provide complete CRUD functionality;
+- manage related database tables;
+- implement authentication and security controls;
+- provide a frontend interface for users;
+- generate reports and system summaries;
+- document and test the application.
+
+---
+
+## Technologies Used
+
+### Backend
 
 - Node.js
 - Express.js
+- CommonJS
+- REST API
+
+### Database
+
 - Microsoft SQL Server
-- JWT Authentication
-- bcrypt Password Hashing
-- Express Validator
-- Swagger (In Progress)
-- Git & GitHub
-- Postman
+- MSSQL Node.js library
+- Parameterized SQL queries
+
+### Frontend
+
+- HTML5
+- CSS3
+- JavaScript
+- Fetch API
+
+### Security
+
+- JSON Web Token
+- bcrypt
+- bcryptjs
+- Authentication middleware
+- Protected API routes
+
+### Testing
+
+- Jest
+- Supertest
+
+### API Documentation
+
+- Swagger UI Express
+- Swagger JSDoc
+
+### Logging and Development
+
+- Morgan
+- Winston
+- Nodemon
+- dotenv
 
 ---
 
-# Project Structure
+## Application Features
 
-```
-ISMS-Security-Asset-Maintenance
-│
-├── config
-├── controllers
-├── middleware
-├── routes
-├── services
-├── validators
-├── utils
-├── database
-├── tests
-├── docs
-├── swagger
-├── report
-├── presentation
-│
-├── app.js
-├── server.js
-├── package.json
-├── README.md
-├── PROJECT_PROGRESS.md
-└── .env.example
-```
+### Authentication
+
+- Login using email and password
+- Password hashing
+- JWT token generation
+- Protected frontend pages
+- Protected REST API endpoints
+- Logout function
+
+### Dashboard
+
+The dashboard displays:
+
+- total users;
+- total sites;
+- total vendors;
+- total asset categories;
+- database connection status;
+- system health information;
+- navigation to all modules.
+
+### User Management
+
+The Users module supports:
+
+- create user;
+- view users;
+- edit user;
+- delete user;
+- search users;
+- display user role;
+- display phone number;
+- display creation date.
+
+### Site Management
+
+The Sites module supports:
+
+- create site;
+- view sites;
+- edit site;
+- delete site;
+- search sites;
+- store site address;
+- store contact person;
+- store contact number;
+- display creation date.
+
+### Vendor Management
+
+The Vendors module supports:
+
+- create vendor;
+- view vendors;
+- edit vendor;
+- delete vendor;
+- search vendors;
+- store contact person;
+- store email;
+- store phone number;
+- display creation date.
+
+### Asset Category Management
+
+The Asset Categories module supports:
+
+- create asset category;
+- view asset categories;
+- edit asset category;
+- delete asset category;
+- search asset categories;
+- store category description;
+- display creation date.
+
+### Asset Management
+
+The Assets module supports:
+
+- create asset;
+- view assets;
+- edit asset;
+- delete asset;
+- search assets;
+- assign asset category;
+- assign site;
+- assign vendor;
+- store asset tag;
+- store installation date;
+- store warranty expiry date;
+- manage asset status.
+
+### Maintenance Request Management
+
+The Maintenance Requests module supports:
+
+- create maintenance request;
+- automatically generate ticket number;
+- view maintenance requests;
+- edit maintenance request;
+- delete maintenance request;
+- search maintenance requests;
+- assign site;
+- assign asset;
+- assign engineer;
+- assign vendor;
+- store request type;
+- store priority;
+- store status;
+- store target date;
+- store description;
+- display description under the request title.
+
+### Reports
+
+The Reports module displays:
+
+- total users;
+- total sites;
+- total vendors;
+- total asset categories;
+- total assets;
+- total maintenance requests;
+- open requests;
+- in-progress requests;
+- critical requests;
+- completed requests;
+- assets grouped by status;
+- requests grouped by priority;
+- latest maintenance requests.
+
+The Reports page also supports:
+
+- CSV export;
+- printing;
+- searching maintenance records;
+- refreshing report data.
+
+### Settings
+
+The Settings module supports:
+
+- system name;
+- organisation name;
+- support email;
+- support phone;
+- time zone;
+- date format;
+- notification preferences;
+- account information;
+- application version;
+- database health information.
+
+Settings are stored locally in the browser.
 
 ---
 
-# Database
+## Database Tables
 
-Database Name
-
-```
-ISMS_DB
-```
-
-Tables
+The application uses the following related tables:
 
 - Roles
 - Users
@@ -78,309 +278,109 @@ Tables
 - RequestUpdates
 - AuditLogs
 
----
+Important relationships include:
 
-# SQL Server Features
-
-Views
-
-- vw_AssetSummary
-- vw_OpenRequests
-- vw_EngineerWorkload
-- vw_VendorPerformance
-
-Stored Procedures
-
-- sp_CreateMaintenanceRequest
-- sp_AssignEngineer
-- sp_UpdateRequestStatus
-- sp_CloseRequest
-- sp_GetDashboard
-
-Functions
-
-- fn_TotalAssets
-- fn_TotalOpenRequests
-- fn_TotalCriticalRequests
-- fn_RequestAge
-
-Trigger
-
-- trg_MaintenanceRequest_StatusChange
+- Users are linked to Roles.
+- Assets are linked to AssetCategories.
+- Assets are linked to Sites.
+- Assets are linked to Vendors.
+- MaintenanceRequests are linked to Sites.
+- MaintenanceRequests are linked to Assets.
+- MaintenanceRequests are linked to Users.
+- MaintenanceRequests may be linked to Vendors.
 
 ---
 
-# Installation
-
-## 1. Clone Repository
-
-```bash
-git clone https://github.com/shriniwasv6-sys/ISMS-Security-Asset-Maintenance.git
-```
-
----
-
-## 2. Enter Project
-
-```bash
-cd ISMS-Security-Asset-Maintenance
-```
-
----
-
-## 3. Install Packages
-
-```bash
-npm install
-```
-
----
-
-## 4. Create Environment File
-
-Copy
-
-```
-.env.example
-```
-
-to
-
-```
-.env
-```
-
-Example
-
-```env
-PORT=3000
-
-DB_SERVER=localhost\SQLEXPRESS
-DB_DATABASE=ISMS_DB
-DB_USER=sa
-DB_PASSWORD=YOUR_PASSWORD
-
-JWT_SECRET=YOUR_SECRET
-JWT_EXPIRES_IN=1d
-```
-
----
-
-## 5. Create Database
-
-Execute the SQL scripts in this order:
-
-```
-database/01_CreateDatabase.sql
-
-database/02_InsertSampleData.sql
-
-database/03_Views.sql
-
-database/04_StoredProcedures.sql
-
-database/05_Functions.sql
-
-database/06_Triggers.sql
-```
-
----
-
-## 6. Run Application
-
-```bash
-npm start
-```
-
-Expected Output
-
-```
-ISMS API running on port 3000
-
-Connected to SQL Server
-```
-
----
-
-# Authentication
-
-Login
-
-```
-POST
-
-/api/auth/login
-```
-
-Example
-
-```json
-{
-  "email":"sharma@isimms.com",
-  "password":"Password@123"
-}
-```
-
----
-
-# Health API
-
-```
-GET
-
-/api/v1/health
-```
-
----
-
-# Users API
-
-```
-GET
-
-/api/users
-```
-
-```
-GET
-
-/api/users/{id}
-```
-
-```
-POST
-
-/api/users
-```
-
-```
-PUT
-
-/api/users/{id}
-```
-
-```
-DELETE
-
-/api/users/{id}
-```
-
----
-
-# Sites API
-
-```
-GET
-
-/api/sites
-```
-
-```
-POST
-
-/api/sites
-```
-
-```
-PUT
-
-/api/sites/{id}
-```
-
-```
-DELETE
-
-/api/sites/{id}
-```
-
----
-
-# Vendors API
-
-```
-GET
-
-/api/vendors
-```
-
-```
-POST
-
-/api/vendors
-```
-
-```
-PUT
-
-/api/vendors/{id}
-```
-
-```
-DELETE
-
-/api/vendors/{id}
-```
-
----
-
-# Asset Categories API
-
-```
-GET
-
-/api/asset-categories
-```
-
-```
-POST
-
-/api/asset-categories
-```
-
-```
-PUT
-
-/api/asset-categories/{id}
-```
-
-```
-DELETE
-
-/api/asset-categories/{id}
-```
-
----
-
-# Current Project Status
-
-| Module | Status |
-|---------|:------:|
-| SQL Server Database | ✅ |
-| JWT Authentication | ✅ |
-| Health API | ✅ |
-| Users CRUD | ✅ |
-| Sites CRUD | ✅ |
-| Vendors CRUD | ✅ |
-| Asset Categories CRUD | ✅ |
-| Assets CRUD | 🚧 In Progress |
-| Maintenance Requests | 🚧 In Progress |
-| Dashboard | 🚧 In Progress |
-| Swagger | 🚧 In Progress |
-
----
-
-# GitHub
-
-Repository
-
-https://github.com/shriniwasv6-sys/ISMS-Security-Asset-Maintenance
-
----
-
-# Author
-
-**Vishwakarma Shriniwas**
-
-Server-Side Development (SSD2026APR)
-
-Integrated Security Management System (ISMS) 2026
+## Project Structure
+
+```text
+ISMS-Security-Asset-Maintenance/
+│
+├── config/
+│   └── db.js
+│
+├── controllers/
+│   ├── assetCategoriesController.js
+│   ├── assetsController.js
+│   ├── authController.js
+│   ├── maintenanceRequestsController.js
+│   ├── sitesController.js
+│   ├── usersController.js
+│   └── vendorsController.js
+│
+├── database/
+│   ├── 01_CreateDatabase.sql
+│   ├── 02_InsertSampleData.sql
+│   ├── 03_Views.sql
+│   ├── 04_StoredProcedures.sql
+│   ├── 05_Functions.sql
+│   └── 06_Triggers.sql
+│
+├── middleware/
+│   └── authMiddleware.js
+│
+├── public/
+│   ├── css/
+│   │   └── main.css
+│   │
+│   ├── js/
+│   │   ├── api.js
+│   │   ├── asset-categories.js
+│   │   ├── assets.js
+│   │   ├── auth.js
+│   │   ├── dashboard.js
+│   │   ├── layout.js
+│   │   ├── login.js
+│   │   ├── maintenance-requests.js
+│   │   ├── reports.js
+│   │   ├── settings.js
+│   │   ├── sites.js
+│   │   ├── users.js
+│   │   └── vendors.js
+│   │
+│   ├── asset-categories.html
+│   ├── assets.html
+│   ├── dashboard.html
+│   ├── index.html
+│   ├── login.html
+│   ├── maintenance-requests.html
+│   ├── reports.html
+│   ├── settings.html
+│   ├── sites.html
+│   ├── users.html
+│   └── vendors.html
+│
+├── routes/
+│   ├── assetCategoriesRoutes.js
+│   ├── assetsRoutes.js
+│   ├── authRoutes.js
+│   ├── maintenanceRequestsRoutes.js
+│   ├── sitesRoutes.js
+│   ├── usersRoutes.js
+│   └── vendorsRoutes.js
+│
+├── services/
+│   ├── assetCategoriesService.js
+│   ├── assetsService.js
+│   ├── maintenanceRequestsService.js
+│   ├── sitesService.js
+│   ├── usersService.js
+│   └── vendorsService.js
+│
+├── swagger/
+│   └── swagger.js
+│
+├── tests/
+│   ├── assets.test.js
+│   ├── auth.test.js
+│   └── maintenanceRequests.test.js
+│
+├── .env
+├── .gitignore
+├── app.js
+├── package.json
+├── package-lock.json
+├── PROJECT_PROGRESS.md
+├── README.md
+├── server.js
+└── test-db.js
