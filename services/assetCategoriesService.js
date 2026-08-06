@@ -3,9 +3,13 @@ const { poolPromise } = require("../config/db");
 async function getAllCategories() {
     const pool = await poolPromise;
     const result = await pool.request().query(`
-        SELECT *
-        FROM AssetCategories
-        ORDER BY CategoryId
+        SELECT
+            CategoryId,
+            CategoryName,
+            Description,
+            CreatedAt
+        FROM dbo.AssetCategories
+        ORDER BY CategoryId;
     `);
     return result.recordset;
 }
@@ -15,8 +19,12 @@ async function getCategoryById(id) {
     const result = await pool.request()
         .input("id", id)
         .query(`
-            SELECT *
-            FROM AssetCategories
+            SELECT
+                CategoryId,
+                CategoryName,
+                Description,
+                CreatedAt
+            FROM dbo.AssetCategories
             WHERE CategoryId = @id
         `);
     return result.recordset[0];

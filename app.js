@@ -9,8 +9,7 @@ const sitesRoutes = require("./routes/sitesRoutes");
 const vendorsRoutes = require("./routes/vendorsRoutes");
 const assetCategoriesRoutes = require("./routes/assetCategoriesRoutes");
 const assetsRoutes = require("./routes/assetsRoutes");
-
-app.use("/api/assets", assetsRoutes);
+const maintenanceRequestsRoutes = require("./routes/maintenanceRequestsRoutes");
 
 const { poolPromise } = require("./config/db");
 
@@ -20,6 +19,8 @@ app.use(cors());
 app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
 app.use(morgan("dev"));
+app.use("/api/assets", assetsRoutes);
+app.use("/api/maintenance-requests",maintenanceRequestsRoutes);
 
 /*
  * Open login.html when visiting:

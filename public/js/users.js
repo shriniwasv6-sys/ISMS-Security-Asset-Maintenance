@@ -85,7 +85,8 @@ function getUserId(user) {
         user.UserId ??
         user.userId ??
         user.user_id ??
-        user.id
+        user.id ??
+        ""
     );
 }
 
@@ -109,16 +110,19 @@ function getEmail(user) {
 
 function getPhoneNumber(user) {
     return (
+        user.Phone ??
+        user.phone ??
         user.PhoneNumber ??
         user.phoneNumber ??
         user.phone_number ??
-        user.phone ??
         ""
     );
 }
 
-function getRoleId(user) {
+function getRole(user) {
     return (
+        user.RoleName ??
+        user.roleName ??
         user.RoleId ??
         user.roleId ??
         user.role_id ??
@@ -216,7 +220,7 @@ function renderUsers(userList) {
             </td>
 
             <td>
-                ${escapeHtml(getRoleId(user))}
+                ${escapeHtml(getRole(user))}
             </td>
 
             <td>
@@ -228,7 +232,7 @@ function renderUsers(userList) {
                     class="small-button edit-button"
                     type="button"
                     data-action="edit"
-                    data-user-id="${userId}"
+                    data-user-id="${escapeHtml(userId)}"
                 >
                     Edit
                 </button>
@@ -237,7 +241,7 @@ function renderUsers(userList) {
                     class="small-button delete-button"
                     type="button"
                     data-action="delete"
-                    data-user-id="${userId}"
+                    data-user-id="${escapeHtml(userId)}"
                 >
                     Delete
                 </button>
@@ -303,8 +307,13 @@ function openEditUserForm(userId) {
     phoneNumberInput.value =
         getPhoneNumber(user);
 
+    /*
+     * Your GET /api/users response returns RoleName,
+     * but the form requires a numeric RoleId.
+     * Convert common role names to their IDs.
+     */
     roleIdInput.value =
-        getRoleId(user);
+        getRoleIdForForm(user);
 
     passwordInput.required = false;
     passwordInput.value = "";
@@ -320,6 +329,40 @@ function openEditUserForm(userId) {
 }
 
 /**
+ * Convert API role data into a numeric Role ID
+ * for the edit form.
+ *
+ * Update these values if your Roles table uses
+ * different IDs.
+ */
+function getRoleIdForForm(user) {
+    const directRoleId =
+        user.RoleId ??
+        user.roleId ??
+        user.role_id;
+
+    if (directRoleId !== undefined &&
+        directRoleId !== null &&
+        directRoleId !== "") {
+        return directRoleId;
+    }
+
+    const roleName =
+        String(getRole(user))
+            .trim()
+            .toLowerCase();
+
+    const roleMap = {
+        admin: 1,
+        manager: 2,
+        engineer: 3,
+        user: 4
+    };
+
+    return roleMap[roleName] ?? "";
+}
+
+/**
  * Create or update a user.
  */
 userForm.addEventListener(
@@ -332,18 +375,60 @@ userForm.addEventListener(
         const userId =
             userIdInput.value.trim();
 
+        const fullName =
+            fullNameInput.value.trim();
+
+        const email =
+            emailInput.value.trim();
+
+        const phone =
+            phoneNumberInput.value.trim();
+
+        const roleId =
+            Number(roleIdInput.value);
+
+        if (!fullName) {
+            showPageMessage(
+                formMessage,
+                "Full name is required.",
+                "error"
+            );
+
+            return;
+        }
+
+        if (!email) {
+            showPageMessage(
+                formMessage,
+                "Email is required.",
+                "error"
+            );
+
+            return;
+        }
+
+        if (
+            !Number.isInteger(roleId) ||
+            roleId <= 0
+        ) {
+            showPageMessage(
+                formMessage,
+                "Please enter a valid Role ID.",
+                "error"
+            );
+
+            return;
+        }
+
+        /*
+         * The backend usersService expects:
+         * fullName, email, phone, roleId, password.
+         */
         const userData = {
-            fullName:
-                fullNameInput.value.trim(),
-
-            email:
-                emailInput.value.trim(),
-
-            phoneNumber:
-                phoneNumberInput.value.trim(),
-
-            roleId:
-                Number(roleIdInput.value)
+            fullName,
+            email,
+            phone,
+            roleId
         };
 
         /*
@@ -482,8 +567,10 @@ async function deleteUser(userId) {
         loggedInUser?.id;
 
     if (
+        loggedInUserId !== undefined &&
+        loggedInUserId !== null &&
         String(loggedInUserId) ===
-        String(userId)
+            String(userId)
     ) {
         showPageMessage(
             usersMessage,
@@ -541,12 +628,13 @@ userSearchInput.addEventListener(
                     getFullName(user),
                     getEmail(user),
                     getPhoneNumber(user),
-                    getRoleId(user)
+                    getRole(user),
+                    getCreatedAt(user)
                 ];
 
                 return values.some(
                     (value) =>
-                        String(value)
+                        String(value ?? "")
                             .toLowerCase()
                             .includes(searchTerm)
                 );

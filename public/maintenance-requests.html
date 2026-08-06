@@ -1,0 +1,379 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+
+    <meta
+        name="viewport"
+        content="width=device-width, initial-scale=1.0"
+    >
+
+    <title>ISMS Maintenance Requests</title>
+
+    <link
+        rel="stylesheet"
+        href="/css/main.css"
+    >
+</head>
+
+<body>
+    <aside
+        id="sidebar"
+        class="sidebar"
+    ></aside>
+
+    <header
+        id="topbar"
+        class="topbar"
+    ></header>
+
+    <main class="main-content">
+        <section class="page-heading">
+            <div>
+                <h1>Maintenance Requests</h1>
+
+                <p>
+                    Create, assign, update and track maintenance requests.
+                </p>
+            </div>
+
+            <button
+                id="showRequestFormButton"
+                class="primary-button"
+                type="button"
+            >
+                Add Request
+            </button>
+        </section>
+
+        <section
+            id="requestFormPanel"
+            class="content-panel hidden"
+        >
+            <div class="panel-header">
+                <div>
+                    <h2 id="requestFormTitle">
+                        Add Maintenance Request
+                    </h2>
+
+                    <p>
+                        Enter the request information below.
+                    </p>
+                </div>
+            </div>
+
+            <form id="requestForm">
+                <input
+                    id="requestId"
+                    type="hidden"
+                >
+
+                <div class="form-grid">
+                    <div class="form-group">
+                        <label for="title">
+                            Title
+                        </label>
+
+                        <input
+                            id="title"
+                            type="text"
+                            maxlength="200"
+                            required
+                        >
+                    </div>
+
+                    <div class="form-group">
+                        <label for="requestType">
+                            Request Type
+                        </label>
+
+                        <select
+                            id="requestType"
+                            required
+                        >
+                            <option value="">
+                                Select request type
+                            </option>
+
+                            <option value="Corrective">
+                                Corrective
+                            </option>
+
+                            <option value="Preventive">
+                                Preventive
+                            </option>
+
+                            <option value="Inspection">
+                                Inspection
+                            </option>
+
+                            <option value="Breakdown">
+                                Breakdown
+                            </option>
+
+                            <option value="Upgrade">
+                                Upgrade
+                            </option>
+                        </select>
+                    </div>
+
+                    <div class="form-group">
+                        <label for="priority">
+                            Priority
+                        </label>
+
+                        <select
+                            id="priority"
+                            required
+                        >
+                            <option value="">
+                                Select priority
+                            </option>
+
+                            <option value="Low">
+                                Low
+                            </option>
+
+                            <option value="Medium">
+                                Medium
+                            </option>
+
+                            <option value="High">
+                                High
+                            </option>
+
+                            <option value="Critical">
+                                Critical
+                            </option>
+                        </select>
+                    </div>
+
+                    <div class="form-group">
+                        <label for="status">
+                            Status
+                        </label>
+
+                        <select
+                            id="status"
+                            required
+                        >
+                            <option value="Open">
+                                Open
+                            </option>
+
+                            <option value="Assigned">
+                                Assigned
+                            </option>
+
+                            <option value="In Progress">
+                                In Progress
+                            </option>
+
+                            <option value="Pending Vendor">
+                                Pending Vendor
+                            </option>
+
+                            <option value="Completed">
+                                Completed
+                            </option>
+
+                            <option value="Closed">
+                                Closed
+                            </option>
+
+                            <option value="Cancelled">
+                                Cancelled
+                            </option>
+                        </select>
+                    </div>
+
+                    <div class="form-group">
+                        <label for="siteId">
+                            Site
+                        </label>
+
+                        <select
+                            id="siteId"
+                            required
+                        >
+                            <option value="">
+                                Select site
+                            </option>
+                        </select>
+                    </div>
+
+                    <div class="form-group">
+                        <label for="assetId">
+                            Asset
+                        </label>
+
+                        <select
+                            id="assetId"
+                            required
+                        >
+                            <option value="">
+                                Select asset
+                            </option>
+                        </select>
+                    </div>
+
+                    <div class="form-group">
+                        <label for="raisedBy">
+                            Raised By
+                        </label>
+
+                        <select
+                            id="raisedBy"
+                            required
+                        >
+                            <option value="">
+                                Select user
+                            </option>
+                        </select>
+                    </div>
+
+                    <div class="form-group">
+                        <label for="assignedTo">
+                            Assigned To
+                        </label>
+
+                        <select id="assignedTo">
+                            <option value="">
+                                Not assigned
+                            </option>
+                        </select>
+                    </div>
+
+                    <div class="form-group">
+                        <label for="vendorId">
+                            Vendor
+                        </label>
+
+                        <select id="vendorId">
+                            <option value="">
+                                No vendor
+                            </option>
+                        </select>
+                    </div>
+
+                    <div class="form-group">
+                        <label for="targetDate">
+                            Target Date
+                        </label>
+
+                        <input
+                            id="targetDate"
+                            type="date"
+                        >
+                    </div>
+
+                    <div class="form-group form-grid-full">
+                        <label for="description">
+                            Description
+                        </label>
+
+                        <textarea
+                            id="description"
+                            rows="4"
+                        ></textarea>
+                    </div>
+                </div>
+
+                <div class="form-actions">
+                    <button
+                        class="primary-button"
+                        type="submit"
+                    >
+                        Save Request
+                    </button>
+
+                    <button
+                        id="cancelRequestButton"
+                        class="secondary-button"
+                        type="button"
+                    >
+                        Cancel
+                    </button>
+                </div>
+            </form>
+
+            <p
+                id="requestFormMessage"
+                class="page-message"
+                aria-live="polite"
+            ></p>
+        </section>
+
+        <section class="content-panel">
+            <div class="panel-header table-panel-header">
+                <div>
+                    <h2>Maintenance Requests</h2>
+
+                    <p>
+                        Existing maintenance request records.
+                    </p>
+                </div>
+
+                <div class="table-tools">
+                    <input
+                        id="requestSearch"
+                        class="search-input"
+                        type="search"
+                        placeholder="Search requests..."
+                    >
+
+                    <button
+                        id="refreshRequestsButton"
+                        class="secondary-button"
+                        type="button"
+                    >
+                        Refresh
+                    </button>
+                </div>
+            </div>
+
+            <div class="table-container">
+                <table>
+                    <thead>
+                        <tr>
+                            <th>ID</th>
+                            <th>Ticket No</th>
+                            <th>Title</th>
+                            <th>Type</th>
+                            <th>Priority</th>
+                            <th>Status</th>
+                            <th>Site</th>
+                            <th>Asset</th>
+                            <th>Raised By</th>
+                            <th>Assigned To</th>
+                            <th>Vendor</th>
+                            <th>Date Raised</th>
+                            <th>Target Date</th>
+                            <th>Actions</th>
+                        </tr>
+                    </thead>
+
+                    <tbody id="requestsTableBody">
+                        <tr>
+                            <td colspan="14">
+                                Loading maintenance requests...
+                            </td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+
+            <p
+                id="requestsMessage"
+                class="page-message"
+                aria-live="polite"
+            ></p>
+        </section>
+    </main>
+
+    <script src="/js/api.js"></script>
+    <script src="/js/auth.js"></script>
+    <script src="/js/layout.js"></script>
+    <script src="/js/maintenance-requests.js"></script>
+</body>
+</html>

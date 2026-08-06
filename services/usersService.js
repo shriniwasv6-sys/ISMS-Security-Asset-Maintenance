@@ -5,9 +5,16 @@ async function getAllUsers() {
     const pool = await poolPromise;
 
     const result = await pool.request().query(`
-        SELECT u.UserId, u.FullName, u.Email, u.Phone, r.RoleName
+        SELECT
+            u.UserId,
+            u.FullName,
+            u.Email,
+            u.Phone,
+            r.RoleName,
+            u.CreatedAt
         FROM Users u
-        INNER JOIN Roles r ON u.RoleId = r.RoleId
+        INNER JOIN Roles r
+            ON u.RoleId = r.RoleId
         ORDER BY u.UserId
     `);
 
@@ -20,9 +27,16 @@ async function getUserById(id) {
     const result = await pool.request()
         .input("id", id)
         .query(`
-            SELECT u.UserId, u.FullName, u.Email, u.Phone, r.RoleName
+            SELECT
+                u.UserId,
+                u.FullName,
+                u.Email,
+                u.Phone,
+                r.RoleName,
+                u.CreatedAt
             FROM Users u
-            INNER JOIN Roles r ON u.RoleId = r.RoleId
+            INNER JOIN Roles r
+                ON u.RoleId = r.RoleId
             WHERE u.UserId = @id
         `);
 
@@ -31,7 +45,10 @@ async function getUserById(id) {
 
 async function createUser(user) {
     const pool = await poolPromise;
-    const passwordHash = await bcrypt.hash(user.password, 10);
+    const passwordHash = await bcrypt.hash(
+        user.password,
+        10
+    );
 
     const result = await pool.request()
         .input("fullName", user.fullName)
@@ -40,8 +57,22 @@ async function createUser(user) {
         .input("phone", user.phone)
         .input("roleId", user.roleId)
         .query(`
-            INSERT INTO Users (FullName, Email, PasswordHash, Phone, RoleId)
-            VALUES (@fullName, @email, @passwordHash, @phone, @roleId);
+            INSERT INTO Users
+            (
+                FullName,
+                Email,
+                PasswordHash,
+                Phone,
+                RoleId
+            )
+            VALUES
+            (
+                @fullName,
+                @email,
+                @passwordHash,
+                @phone,
+                @roleId
+            );
 
             SELECT SCOPE_IDENTITY() AS UserId;
         `);
@@ -60,7 +91,8 @@ async function updateUser(id, user) {
         .input("roleId", user.roleId)
         .query(`
             UPDATE Users
-            SET FullName = @fullName,
+            SET
+                FullName = @fullName,
                 Email = @email,
                 Phone = @phone,
                 RoleId = @roleId

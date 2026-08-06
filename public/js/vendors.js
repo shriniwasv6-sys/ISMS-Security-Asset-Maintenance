@@ -25,9 +25,6 @@ const emailInput =
 const phoneNumberInput =
     document.getElementById("phoneNumber");
 
-const addressInput =
-    document.getElementById("address");
-
 const showVendorFormButton =
     document.getElementById("showVendorFormButton");
 
@@ -72,7 +69,8 @@ function getVendorId(vendor) {
         vendor.VendorId ??
         vendor.vendorId ??
         vendor.vendor_id ??
-        vendor.id
+        vendor.id ??
+        ""
     );
 }
 
@@ -105,18 +103,19 @@ function getEmail(vendor) {
 
 function getPhoneNumber(vendor) {
     return (
+        vendor.Phone ??
+        vendor.phone ??
         vendor.PhoneNumber ??
         vendor.phoneNumber ??
-        vendor.phone_number ??
-        vendor.phone ??
         ""
     );
 }
 
-function getAddress(vendor) {
+function getCreatedAt(vendor) {
     return (
-        vendor.Address ??
-        vendor.address ??
+        vendor.CreatedAt ??
+        vendor.createdAt ??
+        vendor.created_at ??
         ""
     );
 }
@@ -187,23 +186,33 @@ function renderVendors(vendorList) {
             </td>
 
             <td>
-                ${escapeHtml(getVendorName(vendor))}
+                ${escapeHtml(
+                    getVendorName(vendor)
+                )}
             </td>
 
             <td>
-                ${escapeHtml(getContactPerson(vendor))}
+                ${escapeHtml(
+                    getContactPerson(vendor)
+                )}
             </td>
 
             <td>
-                ${escapeHtml(getEmail(vendor))}
+                ${escapeHtml(
+                    getEmail(vendor)
+                )}
             </td>
 
             <td>
-                ${escapeHtml(getPhoneNumber(vendor))}
+                ${escapeHtml(
+                    getPhoneNumber(vendor)
+                )}
             </td>
 
             <td>
-                ${escapeHtml(getAddress(vendor))}
+                ${formatDate(
+                    getCreatedAt(vendor)
+                )}
             </td>
 
             <td class="action-cell">
@@ -211,7 +220,7 @@ function renderVendors(vendorList) {
                     class="small-button edit-button"
                     type="button"
                     data-action="edit"
-                    data-vendor-id="${vendorId}"
+                    data-vendor-id="${escapeHtml(vendorId)}"
                 >
                     Edit
                 </button>
@@ -220,7 +229,7 @@ function renderVendors(vendorList) {
                     class="small-button delete-button"
                     type="button"
                     data-action="delete"
-                    data-vendor-id="${vendorId}"
+                    data-vendor-id="${escapeHtml(vendorId)}"
                 >
                     Delete
                 </button>
@@ -281,9 +290,6 @@ function openEditVendorForm(vendorId) {
     phoneNumberInput.value =
         getPhoneNumber(vendor);
 
-    addressInput.value =
-        getAddress(vendor);
-
     vendorFormPanel.classList.remove(
         "hidden"
     );
@@ -314,12 +320,19 @@ vendorForm.addEventListener(
             email:
                 emailInput.value.trim(),
 
-            phoneNumber:
-                phoneNumberInput.value.trim(),
-
-            address:
-                addressInput.value.trim()
+            phone:
+                phoneNumberInput.value.trim()
         };
+
+        if (!vendorData.vendorName) {
+            showMessage(
+                vendorFormMessage,
+                "Vendor name is required.",
+                "error"
+            );
+
+            return;
+        }
 
         try {
             if (vendorId) {
@@ -462,12 +475,12 @@ vendorSearchInput.addEventListener(
                     getContactPerson(vendor),
                     getEmail(vendor),
                     getPhoneNumber(vendor),
-                    getAddress(vendor)
+                    getCreatedAt(vendor)
                 ];
 
                 return values.some(
                     (value) =>
-                        String(value)
+                        String(value ?? "")
                             .toLowerCase()
                             .includes(searchTerm)
                 );
@@ -513,6 +526,20 @@ function escapeHtml(value) {
         .replaceAll(">", "&gt;")
         .replaceAll('"', "&quot;")
         .replaceAll("'", "&#039;");
+}
+
+function formatDate(value) {
+    if (!value) {
+        return "";
+    }
+
+    const date = new Date(value);
+
+    if (Number.isNaN(date.getTime())) {
+        return escapeHtml(value);
+    }
+
+    return date.toLocaleString();
 }
 
 showVendorFormButton.addEventListener(

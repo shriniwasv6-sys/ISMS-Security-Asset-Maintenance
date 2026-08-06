@@ -1,0 +1,361 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+
+    <meta
+        name="viewport"
+        content="width=device-width, initial-scale=1.0"
+    >
+
+    <title>ISMS Settings</title>
+
+    <link
+        rel="stylesheet"
+        href="/css/main.css"
+    >
+</head>
+
+<body>
+    <aside
+        id="sidebar"
+        class="sidebar"
+    ></aside>
+
+    <header
+        id="topbar"
+        class="topbar"
+    ></header>
+
+    <main class="main-content">
+        <section class="page-heading">
+            <div>
+                <h1>System Settings</h1>
+
+                <p>
+                    Configure general ISMS application preferences.
+                </p>
+            </div>
+        </section>
+
+        <section class="settings-grid">
+            <article class="content-panel">
+                <div class="panel-header">
+                    <div>
+                        <h2>General Settings</h2>
+
+                        <p>
+                            Update the system and organisation details.
+                        </p>
+                    </div>
+                </div>
+
+                <form id="generalSettingsForm">
+                    <div class="form-grid">
+                        <div class="form-group">
+                            <label for="systemName">
+                                System Name
+                            </label>
+
+                            <input
+                                id="systemName"
+                                type="text"
+                                maxlength="100"
+                                required
+                            >
+                        </div>
+
+                        <div class="form-group">
+                            <label for="organisationName">
+                                Organisation Name
+                            </label>
+
+                            <input
+                                id="organisationName"
+                                type="text"
+                                maxlength="150"
+                            >
+                        </div>
+
+                        <div class="form-group">
+                            <label for="supportEmail">
+                                Support Email
+                            </label>
+
+                            <input
+                                id="supportEmail"
+                                type="email"
+                                maxlength="150"
+                            >
+                        </div>
+
+                        <div class="form-group">
+                            <label for="supportPhone">
+                                Support Phone
+                            </label>
+
+                            <input
+                                id="supportPhone"
+                                type="text"
+                                maxlength="30"
+                            >
+                        </div>
+
+                        <div class="form-group">
+                            <label for="timeZone">
+                                Time Zone
+                            </label>
+
+                            <select id="timeZone">
+                                <option value="Asia/Singapore">
+                                    Asia/Singapore
+                                </option>
+
+                                <option value="UTC">
+                                    UTC
+                                </option>
+
+                                <option value="Asia/Kolkata">
+                                    Asia/Kolkata
+                                </option>
+
+                                <option value="Asia/Kuala_Lumpur">
+                                    Asia/Kuala Lumpur
+                                </option>
+                            </select>
+                        </div>
+
+                        <div class="form-group">
+                            <label for="dateFormat">
+                                Date Format
+                            </label>
+
+                            <select id="dateFormat">
+                                <option value="DD/MM/YYYY">
+                                    DD/MM/YYYY
+                                </option>
+
+                                <option value="MM/DD/YYYY">
+                                    MM/DD/YYYY
+                                </option>
+
+                                <option value="YYYY-MM-DD">
+                                    YYYY-MM-DD
+                                </option>
+                            </select>
+                        </div>
+                    </div>
+
+                    <div class="form-actions">
+                        <button
+                            class="primary-button"
+                            type="submit"
+                        >
+                            Save General Settings
+                        </button>
+
+                        <button
+                            id="resetGeneralSettingsButton"
+                            class="secondary-button"
+                            type="button"
+                        >
+                            Reset
+                        </button>
+                    </div>
+                </form>
+
+                <p
+                    id="generalSettingsMessage"
+                    class="page-message"
+                    aria-live="polite"
+                ></p>
+            </article>
+
+            <article class="content-panel">
+                <div class="panel-header">
+                    <div>
+                        <h2>Notification Settings</h2>
+
+                        <p>
+                            Choose which maintenance alerts should be enabled.
+                        </p>
+                    </div>
+                </div>
+
+                <form id="notificationSettingsForm">
+                    <div class="settings-option-list">
+                        <label class="settings-toggle-row">
+                            <span>
+                                <strong>Email Notifications</strong>
+
+                                <small>
+                                    Receive maintenance request updates by email.
+                                </small>
+                            </span>
+
+                            <input
+                                id="emailNotifications"
+                                type="checkbox"
+                            >
+                        </label>
+
+                        <label class="settings-toggle-row">
+                            <span>
+                                <strong>Critical Request Alerts</strong>
+
+                                <small>
+                                    Highlight newly raised critical requests.
+                                </small>
+                            </span>
+
+                            <input
+                                id="criticalAlerts"
+                                type="checkbox"
+                            >
+                        </label>
+
+                        <label class="settings-toggle-row">
+                            <span>
+                                <strong>Warranty Expiry Alerts</strong>
+
+                                <small>
+                                    Notify when an asset warranty is nearing expiry.
+                                </small>
+                            </span>
+
+                            <input
+                                id="warrantyAlerts"
+                                type="checkbox"
+                            >
+                        </label>
+
+                        <label class="settings-toggle-row">
+                            <span>
+                                <strong>Daily Summary</strong>
+
+                                <small>
+                                    Show a daily maintenance summary.
+                                </small>
+                            </span>
+
+                            <input
+                                id="dailySummary"
+                                type="checkbox"
+                            >
+                        </label>
+                    </div>
+
+                    <div class="form-actions">
+                        <button
+                            class="primary-button"
+                            type="submit"
+                        >
+                            Save Notification Settings
+                        </button>
+                    </div>
+                </form>
+
+                <p
+                    id="notificationSettingsMessage"
+                    class="page-message"
+                    aria-live="polite"
+                ></p>
+            </article>
+
+            <article class="content-panel">
+                <div class="panel-header">
+                    <div>
+                        <h2>Account Information</h2>
+
+                        <p>
+                            Details for the currently logged-in user.
+                        </p>
+                    </div>
+                </div>
+
+                <div class="settings-account-card">
+                    <div class="settings-account-row">
+                        <span>Full Name</span>
+                        <strong id="accountFullName">-</strong>
+                    </div>
+
+                    <div class="settings-account-row">
+                        <span>Email</span>
+                        <strong id="accountEmail">-</strong>
+                    </div>
+
+                    <div class="settings-account-row">
+                        <span>Role</span>
+                        <strong id="accountRole">-</strong>
+                    </div>
+
+                    <div class="settings-account-row">
+                        <span>User ID</span>
+                        <strong id="accountUserId">-</strong>
+                    </div>
+                </div>
+            </article>
+
+            <article class="content-panel">
+                <div class="panel-header">
+                    <div>
+                        <h2>System Information</h2>
+
+                        <p>
+                            Current application and database health information.
+                        </p>
+                    </div>
+                </div>
+
+                <div class="settings-account-card">
+                    <div class="settings-account-row">
+                        <span>Application</span>
+                        <strong id="systemApplication">-</strong>
+                    </div>
+
+                    <div class="settings-account-row">
+                        <span>Version</span>
+                        <strong id="systemVersion">-</strong>
+                    </div>
+
+                    <div class="settings-account-row">
+                        <span>API Status</span>
+                        <strong id="systemStatus">-</strong>
+                    </div>
+
+                    <div class="settings-account-row">
+                        <span>Database</span>
+                        <strong id="databaseStatus">-</strong>
+                    </div>
+
+                    <div class="settings-account-row">
+                        <span>Last Checked</span>
+                        <strong id="systemCheckedAt">-</strong>
+                    </div>
+                </div>
+
+                <div class="form-actions">
+                    <button
+                        id="refreshSystemInfoButton"
+                        class="secondary-button"
+                        type="button"
+                    >
+                        Refresh System Information
+                    </button>
+                </div>
+
+                <p
+                    id="systemInformationMessage"
+                    class="page-message"
+                    aria-live="polite"
+                ></p>
+            </article>
+        </section>
+    </main>
+
+    <script src="/js/api.js"></script>
+    <script src="/js/auth.js"></script>
+    <script src="/js/layout.js"></script>
+    <script src="/js/settings.js"></script>
+</body>
+</html>

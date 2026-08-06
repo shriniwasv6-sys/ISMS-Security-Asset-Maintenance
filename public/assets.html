@@ -1,0 +1,286 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+
+    <meta
+        name="viewport"
+        content="width=device-width, initial-scale=1.0"
+    >
+
+    <title>ISMS Assets</title>
+
+    <link
+        rel="stylesheet"
+        href="/css/main.css"
+    >
+</head>
+
+<body>
+    <aside
+        id="sidebar"
+        class="sidebar"
+    ></aside>
+
+    <header
+        id="topbar"
+        class="topbar"
+    ></header>
+
+    <main class="main-content">
+        <section class="page-heading">
+            <div>
+                <h1>Asset Management</h1>
+
+                <p>
+                    Create, view, update and delete security assets.
+                </p>
+            </div>
+
+            <button
+                id="showAssetFormButton"
+                class="primary-button"
+                type="button"
+            >
+                Add Asset
+            </button>
+        </section>
+
+        <section
+            id="assetFormPanel"
+            class="content-panel hidden"
+        >
+            <div class="panel-header">
+                <div>
+                    <h2 id="assetFormTitle">
+                        Add Asset
+                    </h2>
+
+                    <p>
+                        Enter the asset information below.
+                    </p>
+                </div>
+            </div>
+
+            <form id="assetForm">
+                <input
+                    id="assetId"
+                    type="hidden"
+                >
+
+                <div class="form-grid">
+                    <div class="form-group">
+                        <label for="assetName">
+                            Asset Name
+                        </label>
+
+                        <input
+                            id="assetName"
+                            type="text"
+                            maxlength="100"
+                            required
+                        >
+                    </div>
+
+                    <div class="form-group">
+                        <label for="assetTag">
+                            Asset Tag
+                        </label>
+
+                        <input
+                            id="assetTag"
+                            type="text"
+                            maxlength="50"
+                            required
+                        >
+                    </div>
+
+                    <div class="form-group">
+                        <label for="categoryId">
+                            Category
+                        </label>
+
+                        <select
+                            id="categoryId"
+                            required
+                        >
+                            <option value="">
+                                Select category
+                            </option>
+                        </select>
+                    </div>
+
+                    <div class="form-group">
+                        <label for="siteId">
+                            Site
+                        </label>
+
+                        <select
+                            id="siteId"
+                            required
+                        >
+                            <option value="">
+                                Select site
+                            </option>
+                        </select>
+                    </div>
+
+                    <div class="form-group">
+                        <label for="vendorId">
+                            Vendor
+                        </label>
+
+                        <select
+                            id="vendorId"
+                            required
+                        >
+                            <option value="">
+                                Select vendor
+                            </option>
+                        </select>
+                    </div>
+
+                    <div class="form-group">
+                        <label for="status">
+                            Status
+                        </label>
+
+                        <select
+                            id="status"
+                            required
+                        >
+                            <option value="Active">
+                                Active
+                            </option>
+
+                            <option value="Inactive">
+                                Inactive
+                            </option>
+
+                            <option value="Under Maintenance">
+                                Under Maintenance
+                            </option>
+
+                            <option value="Retired">
+                                Retired
+                            </option>
+                        </select>
+                    </div>
+
+                    <div class="form-group">
+                        <label for="installationDate">
+                            Installation Date
+                        </label>
+
+                        <input
+                            id="installationDate"
+                            type="date"
+                        >
+                    </div>
+
+                    <div class="form-group">
+                        <label for="warrantyExpiry">
+                            Warranty Expiry
+                        </label>
+
+                        <input
+                            id="warrantyExpiry"
+                            type="date"
+                        >
+                    </div>
+                </div>
+
+                <div class="form-actions">
+                    <button
+                        class="primary-button"
+                        type="submit"
+                    >
+                        Save Asset
+                    </button>
+
+                    <button
+                        id="cancelAssetButton"
+                        class="secondary-button"
+                        type="button"
+                    >
+                        Cancel
+                    </button>
+                </div>
+            </form>
+
+            <p
+                id="assetFormMessage"
+                class="page-message"
+                aria-live="polite"
+            ></p>
+        </section>
+
+        <section class="content-panel">
+            <div class="panel-header table-panel-header">
+                <div>
+                    <h2>Assets</h2>
+
+                    <p>
+                        Existing ISMS asset records.
+                    </p>
+                </div>
+
+                <div class="table-tools">
+                    <input
+                        id="assetSearch"
+                        class="search-input"
+                        type="search"
+                        placeholder="Search assets..."
+                    >
+
+                    <button
+                        id="refreshAssetsButton"
+                        class="secondary-button"
+                        type="button"
+                    >
+                        Refresh
+                    </button>
+                </div>
+            </div>
+
+            <div class="table-container">
+                <table>
+                    <thead>
+                        <tr>
+                            <th>ID</th>
+                            <th>Asset Name</th>
+                            <th>Asset Tag</th>
+                            <th>Category</th>
+                            <th>Site</th>
+                            <th>Vendor</th>
+                            <th>Installation</th>
+                            <th>Warranty</th>
+                            <th>Status</th>
+                            <th>Actions</th>
+                        </tr>
+                    </thead>
+
+                    <tbody id="assetsTableBody">
+                        <tr>
+                            <td colspan="10">
+                                Loading assets...
+                            </td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+
+            <p
+                id="assetsMessage"
+                class="page-message"
+                aria-live="polite"
+            ></p>
+        </section>
+    </main>
+
+    <script src="/js/api.js"></script>
+    <script src="/js/auth.js"></script>
+    <script src="/js/layout.js"></script>
+    <script src="/js/assets.js"></script>
+</body>
+</html>

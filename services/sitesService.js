@@ -1,111 +1,158 @@
+const sql = require("mssql");
 const { poolPromise } = require("../config/db");
 
-// Get all sites
 async function getAllSites() {
     const pool = await poolPromise;
 
     const result = await pool.request().query(`
-        SELECT *
-        FROM Sites
+        SELECT
+            SiteId,
+            SiteName,
+            Address,
+            ContactPerson,
+            ContactNumber,
+            CreatedAt
+        FROM dbo.Sites
         ORDER BY SiteId
     `);
 
     return result.recordset;
 }
 
-// Get site by ID
 async function getSiteById(id) {
     const pool = await poolPromise;
 
-    const result = await pool.request()
-        .input("id", id)
+    const result = await pool
+        .request()
+        .input("id", sql.Int, id)
         .query(`
-            SELECT *
-            FROM Sites
+            SELECT
+                SiteId,
+                SiteName,
+                Address,
+                ContactPerson,
+                ContactNumber,
+                CreatedAt
+            FROM dbo.Sites
             WHERE SiteId = @id
         `);
 
-    return result.recordset[0];
+    return result.recordset[0] || null;
 }
 
-// Create site
 async function createSite(site) {
     const pool = await poolPromise;
 
-    const result = await pool.request()
-        .input("siteName", site.siteName)
-        .input("address", site.address)
+    const result = await pool
+        .request()
+        .input(
+            "siteName",
+            sql.NVarChar(150),
+            site.siteName
+        )
+        .input(
+            "address",
+            sql.NVarChar(250),
+            site.address
+        )
+        .input(
+            "contactPerson",
+            sql.NVarChar(150),
+            site.contactPerson || null
+        )
+        .input(
+            "contactNumber",
+            sql.NVarChar(30),
+            site.contactNumber || null
+        )
         .query(`
-            INSERT INTO Sites
+            INSERT INTO dbo.Sites
             (
                 SiteName,
-                Address
+                Address,
+                ContactPerson,
+                ContactNumber
             )
-
             VALUES
             (
                 @siteName,
-                @address
+                @address,
+                @contactPerson,
+                @contactNumber
             );
 
-            SELECT SCOPE_IDENTITY() AS SiteId;
+            SELECT
+                CAST(SCOPE_IDENTITY() AS INT)
+                AS SiteId;
         `);
 
-    return result.recordset[0];
+    const newSiteId =
+        result.recordset[0].SiteId;
+
+    return getSiteById(newSiteId);
 }
 
-// Update site
 async function updateSite(id, site) {
-
     const pool = await poolPromise;
 
-    await pool.request()
-        .input("id", id)
-        .input("siteName", site.siteName)
-        .input("address", site.address)
+    const result = await pool
+        .request()
+        .input("id", sql.Int, id)
+        .input(
+            "siteName",
+            sql.NVarChar(150),
+            site.siteName
+        )
+        .input(
+            "address",
+            sql.NVarChar(250),
+            site.address
+        )
+        .input(
+            "contactPerson",
+            sql.NVarChar(150),
+            site.contactPerson || null
+        )
+        .input(
+            "contactNumber",
+            sql.NVarChar(30),
+            site.contactNumber || null
+        )
         .query(`
-            UPDATE Sites
-
+            UPDATE dbo.Sites
             SET
-
-                SiteName=@siteName,
-
-                Address=@address
-
-            WHERE SiteId=@id
+                SiteName = @siteName,
+                Address = @address,
+                ContactPerson = @contactPerson,
+                ContactNumber = @contactNumber
+            WHERE SiteId = @id
         `);
+
+    if (result.rowsAffected[0] === 0) {
+        return null;
+    }
 
     return getSiteById(id);
-
 }
 
-// Delete site
 async function deleteSite(id) {
-
     const pool = await poolPromise;
 
-    const result = await pool.request()
-        .input("id", id)
+    const result = await pool
+        .request()
+        .input("id", sql.Int, id)
         .query(`
-            DELETE FROM Sites
-
-            WHERE SiteId=@id
+            DELETE FROM dbo.Sites
+            WHERE SiteId = @id
         `);
 
     return result.rowsAffected[0];
-
 }
 
 module.exports = {
-
     getAllSites,
-
     getSiteById,
-
     createSite,
-
     updateSite,
-
     deleteSite
-
 };
