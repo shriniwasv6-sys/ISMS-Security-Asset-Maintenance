@@ -3,6 +3,8 @@ const path = require("path");
 const cors = require("cors");
 const morgan = require("morgan");
 
+const swaggerUi = require("swagger-ui-express");
+const swaggerSpec = require("./swagger/swagger");
 const authRoutes = require("./routes/authRoutes");
 const usersRoutes = require("./routes/usersRoutes");
 const sitesRoutes = require("./routes/sitesRoutes");
@@ -21,6 +23,8 @@ app.use(express.urlencoded({ extended: true }));
 app.use(morgan("dev"));
 app.use("/api/assets", assetsRoutes);
 app.use("/api/maintenance-requests",maintenanceRequestsRoutes);
+
+app.use("/api-docs",swaggerUi.serve,swaggerUi.setup(swaggerSpec));
 
 /*
  * Open login.html when visiting:
