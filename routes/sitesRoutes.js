@@ -7,6 +7,17 @@ const authorize = require("../middleware/authorize");
 
 const sitesController = require("../controllers/sitesController");
 
+/**
+ * @swagger
+ * /api/sites:
+ *   get:
+ *     summary: Get all sites
+ *     tags:
+ *       - Sites
+ *     responses:
+ *       200:
+ *         description: List of sites
+ */
 router.get(
     "/",
     authenticate,

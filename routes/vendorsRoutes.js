@@ -5,6 +5,19 @@ const authenticate = require("../middleware/authenticate");
 const authorize = require("../middleware/authorize");
 const vendorsController = require("../controllers/vendorsController");
 
+/**
+ * @swagger
+ * /api/vendors:
+ *   get:
+ *     summary: Get all vendors
+ *     tags:
+ *       - Vendors
+ *     responses:
+ *       200:
+ *         description: List of vendors
+ */
+router.get("/", vendorsController.getAllVendors);
+
 router.get("/", authenticate, vendorsController.getAllVendors);
 router.get("/:id", authenticate, vendorsController.getVendorById);
 router.post("/", authenticate, authorize("Admin", "Manager"), vendorsController.createVendor);

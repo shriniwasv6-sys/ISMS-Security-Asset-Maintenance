@@ -62,6 +62,18 @@ app.use(
 /*
  * Health-check endpoint
  */
+
+/**
+ * @swagger
+ * /api/v1/health:
+ *   get:
+ *     summary: Check application and database health
+ *     tags:
+ *       - Health
+ *     responses:
+ *       200:
+ *         description: System health information
+ */
 app.get("/api/v1/health", async (req, res) => {
     try {
         const pool = await poolPromise;

@@ -6,6 +6,17 @@ const assetsController = require(
 
 const router = express.Router();
 
+/**
+ * @swagger
+ * /api/assets:
+ *   get:
+ *     summary: Get all assets
+ *     tags:
+ *       - Assets
+ *     responses:
+ *       200:
+ *         description: List of assets
+ */
 router.get(
     "/",
     assetsController.getAllAssets
